@@ -4,7 +4,7 @@ ckanext-federgob
 
 ## ¿Qué es FederGob?
 
-Es una extensión para CKAN que facilita el proceso de federación con [Datos.gob.es](http://www.datos.gob.es/), el catálogo de datos oficial de España.
+FederGob es una extensión para CKAN que facilita el proceso de federación con [Datos.gob.es](http://www.datos.gob.es/), el catálogo de datos oficial de España. En concreto, el plugin presentado en esta pagina es una version modificada del plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob), que esta especialmente modificado para permitir federación desde aquellas instancias del CKAN que utilicen el plugin [ckanext-dcat](https://github.com/ckan/ckanext-dcat) (el plugin ckanext-dcat causa problemas si estuviera funcionando al unísono con el plugin original de FederGob).
 
 La documentación oficial para federar portales contra [Datos.gob.es](http://www.datos.gob.es/) es la siguiente: [manual del Federador](http://www.datos.gob.es/content/manual-de-uso-de-herramienta-federador). Es recomendable leer la documentación oficial sobre cómo se deben estructurar los metadatos: [Norma Técnica de Interoperabilidad de Reutilización de Recursos de Información](https://www.boe.es/buscar/doc.php?id=BOE-A-2013-2380).
 
@@ -39,12 +39,14 @@ FederGob incluye scripts para automatizar la generación de los metadatos perió
 
 1. No soporta descripciones multi-valuadas. (Por ejemplo, descripciones en varios idiomas).
 
-2. Este plugin no se ha testeado en conjunto con [ckanext-dcat](https://github.com/ckan/ckanext-dcat), podría haber problemas si ambos estuvieran funcionando al unísono.
+2. Este plugin funciona solo en conjunto con [ckanext-dcat](https://github.com/ckan/ckanext-dcat). Si su instancia del CKAN no necesita [ckanext-dcat](https://github.com/ckan/ckanext-dcat), debe utilizar el plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob). Los dos plugins deben ser instalados y configurados por separado.
  
 
 ## ¿Cómo instalar el FederGob?
 
-Copia el [plugin](https://github.com/jesusredondo/ckanext-federgob) a tu carpeta `src` (normalmente es: /usr/lib/ckan/default/src/).
+Existen dos maneras diferentes de instalación del plugin. Si instalandolo de una manera no funciona, se puede hacer utilizando otra manera de instalación. 
+
+1. Copia el [plugin](https://github.com/jesusredondo/ckanext-federgob) a tu carpeta `src` (normalmente es: /usr/lib/ckan/default/src/).
 
 Instalar el plugin:
 
@@ -52,6 +54,12 @@ Instalar el plugin:
     sudo python setup.py develop
 
 Asegurarse que `federgob está en la lista de plugins activos del fichero de configuración de CKAN y reiniciar Apache.
+
+2. Entra en la carpeta `src` de CKAN (normalmente es: /usr/lib/ckan/default/src/)
+
+Ejecutar:
+
+	pip install -e "git+https://github.com/jesusredondo/ckanext-federgob.git#egg=ckanext-federgob"
 
 
 ## ¿Cómo configurar FederGob?
@@ -88,7 +96,9 @@ Para configurar los metadatos del portal hay que ejecutar el script `config.py` 
 
 Si se edita manualmente el fichero `fields.conf` en lugar de utilizar el script `config.py` debes ejecutar `merge_metadata.py` → `sudo python merge_metadata.py` para que los cambios se hagan efectivos. 
 
-Se puede comprobar que la configuración ha sido correcta ejecutando el script que genera los metadatos: `federatedatosgob.py` →  `sudo python federatedatosgob.py`. Si todo ha sido satisfactorio, todos los datasets del catálogo se mostrarán por pantalla y se podrá acceder al fichero de metadatos en la URL: **{-URL-CATALOG-}**/federator.rdf .
+Se puede comprobar que la configuración ha sido correcta ejecutando el script que genera los metadatos: `federatedatosgob.py` →  `sudo python federatedatosgob.py`. Si todo ha sido satisfactorio, todos los datasets del catálogo se encuentran en el fichero RDF de metadatos en la ruta `/ckanext-federgob/ckanext/federgob/public/`.
+
+Ultimo, como el fichero RDF que contiene metadados esta utilizado externamente por el federador, hay que crear en el servidor un enlace con la redirección a dicho fichero.
 
 #### Automatizar la actualización
 
@@ -98,11 +108,11 @@ Adicionalmente, FederGob incluye un script que configura [Cron](http://unixhelp.
 
 ### Configuración externa: Configurar el Federador del portal Datos.gob.es
 
-El federador debe leer los metadatos generados en la URL: {-URL-CATALOG-}/federator.rdf. Sigue el [manual oficial del Federador de Datos.gob.es](http://www.datos.gob.es/content/manual-de-uso-de-herramienta-federador) para configurarlo.
+El federador debe leer los metadatos generados en el fichero RDF de metadatos utilizando el enlace creado en el paso anterior. Sigue el [manual oficial del Federador de Datos.gob.es](http://www.datos.gob.es/content/manual-de-uso-de-herramienta-federador) para configurarlo.
 
 
 ## Reconocimientos
-Este plugin ha sido desarrollado por el grupo [Quercus SEG](http://www.unex.es/investigacion/grupos/quercus) para federar el portal [Opendata Cáceres](http://opendata.caceres.es/) portal.
+Este plugin ha sido desarrollado por el [Ontology Engineering Group](http://www.oeg-upm.net/), y esta basado en el plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob) desarrollado por el grupo [Quercus SEG](http://www.unex.es/investigacion/grupos/quercus).
 
 ## Licencia
 Este plugin se publica bajo la licencia [GNU Affero General Public License (AGPL) v3.0](http://www.gnu.org/licenses/agpl-3.0.html)

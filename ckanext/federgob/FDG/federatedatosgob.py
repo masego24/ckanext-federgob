@@ -4,6 +4,9 @@
 #Script by: Jesús Redondo García
 #Date: 28-10-2014
 
+#Modified by Filip Radulovic and Idafen Santana Pérez
+#Date: 31-03-2016
+
 #Script to generate the whole metadata of the Catalog.
 
 import urllib2
@@ -100,16 +103,20 @@ for name in result:
 	#Remove header, everything that is before <!--dataset_metadata-->"
 	strings_page_RDF = pageRDF.readlines()
 	header_lines = 0
-	while not "<!--dataset_metadata-->" in strings_page_RDF[header_lines]:
+	while not strings_page_RDF[header_lines].strip().startswith("<dcat:Dataset"):
 		header_lines+=1
 
-	while header_lines<len(strings_page_RDF)-2:
-		header_lines+=1
+	while not strings_page_RDF[header_lines].strip().startswith("</rdf:RDF>"):
+#	header_lines+=1
+#	while header_lines<len(strings_page_RDF)-2:
+#		header_lines+=1
 		#print >>final_file, fixTags(strings_page_RDF[header_lines]),
 		fixTags(strings_page_RDF[header_lines],final_file)
+		header_lines+=1
 
 	print pageRDF.read()
 	print >>final_file,"</dcat:dataset>\n"
+#	print >>final_file,'\n'
 
 
 

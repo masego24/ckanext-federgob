@@ -4,7 +4,7 @@ ckanext-federatedatosgob
 
 ## What is federatedatosgob?
 
-It is an extension for CKAN that eases the federation process of CKAN catalogs with the global catalog of Spain, [Datos.gob](http://www.datos.gob.es/).
+It is an extension for CKAN that eases the federation process of CKAN catalogs with the global catalog of Spain, [Datos.gob](http://www.datos.gob.es/). Specifically, the plugin presented on this page is a modified version of the original [FederGob plugin](https://github.com/jesusredondo/ckanext-federgob), designed to enable data federation for those CKAN instances that, at the same time, make use of the [ckanext-dcat](https://github.com/ckan/ckanext-dcat) plugin (original FederGob plugin is incompatible with ckanext-dcat one).
 
 The official documentation to federate portals against [Datos.gob](http://www.datos.gob.es/) can be found here: [Federator manual](http://www.datos.gob.es/content/manual-de-uso-de-herramienta-federador). It’s recommendable to read the official document about how metadata should structure: [Norma Técnica de Interoperabilidad de Reutilización de Recursos de Información](https://www.boe.es/buscar/doc.php?id=BOE-A-2013-2380).
 
@@ -38,12 +38,14 @@ All the datasets in the CKAN catalog should have filled the tag field (etiqueta)
 
 1. It doesn’t support multi-valued fields for descriptions.
 
-2. This plugin has not been tested while using [ckanext-dcat](https://github.com/ckan/ckanext-dcat). Malfunctions could arise when both working.
+2. This plugin only works when used together with [ckanext-dcat](https://github.com/ckan/ckanext-dcat). If your CKAN instance does not use [ckanext-dcat](https://github.com/ckan/ckanext-dcat), you can use the [original FederGob](https://github.com/jesusredondo/ckanext-federgob) plugin. Both plugins should be instaled and configured separately.
  
 
 ## How to install federatedatosgob?
 
-Copy the [plugin](https://github.com/jesusredondo/ckanext-federatedatosgob) to your ckan src folder (normally /usr/lib/ckan/default/src/).
+There are two different ways to install the plugin. If installing it in one way does not work, the other way can be tried.
+
+1. Copy the [plugin](https://github.com/jesusredondo/ckanext-federatedatosgob) to your ckan `src` folder (normally /usr/lib/ckan/default/src/).
 
 Install the plugin:
 
@@ -52,6 +54,11 @@ Install the plugin:
 
 Restart Apache and make sure to add federatedatosgob to ckan.plugins in your config file.
 
+2. Enter the CKAN `src` folder (normally /usr/lib/ckan/default/src/)
+
+Execute
+
+	pip install -e "git+https://github.com/jesusredondo/ckanext-federgob.git#egg=ckanext-federgob"
 
 ## How to configure federatedatosgob with the Federator?
 
@@ -88,7 +95,9 @@ Run the `config.py` script → `sudo python config.py` to configure the metadata
 
 If you manually edit the file `fields.conf` instead of using the script `config.py` you must run `merge_metadata.py` → `sudo python merge_metadata.py` to update the changes. 
 
-To test the metadata generation, run `federatedatosgob.py` →  `sudo python federatedatosgob.py`. If everything works fine, all the datasets in the catalog should be displayed and the metadata could be accessed in the url: **{-URL-CATALOG-}**/federator.rdf .
+To test the metadata generation, run `federatedatosgob.py` →  `sudo python federatedatosgob.py`. If everything works fine, all the datasets in the catalog should be in an RDF file under `/ckanext-federgob/ckanext/federgob/public/`.
+
+Finally, since the RDF file containing the metadata will be used by the federator, it is necessary to create a link with a redirection to the mentioned file.
 
 #### Automatic updates
 
@@ -98,11 +107,11 @@ Additionally, federatedatosgob includes a default method to configure [Cron](htt
 
 ### External configuration: Configure Federator from Datos.gob
 
-The federator must read the metadata that is generated in the url: {-URL-CATALOG-}/federator.rdf. Follow the tutorials from datos.gob to set it up.
+The federator must read the metadata that is generated in the RDF file by accessing it through the link created in the previous step. Follow the tutorials from datos.gob to set it up.
 
 
 ## Acknowledgements
-This plugin has been developed by [Quercus SEG](http://www.unex.es/investigacion/grupos/quercus) to federate the [Opendata Cáceres](http://opendata.caceres.es/) portal.
+This plugin has been developed by the [Ontology Engineering Group](http://www.oeg-upm.net/), and is based on the original [FederGob plugin](https://github.com/jesusredondo/ckanext-federgob) plugin developed by the [Quercus SEG](http://www.unex.es/investigacion/grupos/quercus).
 
 ## License
 This plugin is published under the [GNU Affero General Public License (AGPL) v3.0](http://www.gnu.org/licenses/agpl-3.0.html)

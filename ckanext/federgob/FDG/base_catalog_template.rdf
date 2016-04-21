@@ -9,10 +9,11 @@
   xmlns:tema="http://datos.gob.es/kos/sector-publico/sector/"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:owl="http://www.w3.org/2002/07/owl#">
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:locn="http://www.w3.org/ns/locn#">
 
   <dcat:Catalog rdf:about="{-URL-CATALOG-}"> 
-	<dct:identifier>{-URL-CATALOG-}/federator.rdf</dct:identifier>
+	<dct:identifier>{-URL-CATALOG-}federator.rdf</dct:identifier>
 	<dct:title xml:lang="{-LANGUAGE-}">{-TITLE-}</dct:title>
 	<dct:description xml:lang="{-LANGUAGE-}">{-DESCRIPTION-}</dct:description>
 	<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{-ISSUED-}</dct:issued> 

@@ -1,10 +1,10 @@
-ckanext-federatedatosgob
+ckanext-federgob
 ========================
 
 
-## What is federatedatosgob?
+## What is FederGob?
 
-It is an extension for CKAN that eases the federation process of CKAN catalogs with the global catalog of Spain, [Datos.gob](http://www.datos.gob.es/). Specifically, the plugin presented on this page is a modified version of the original [FederGob plugin](https://github.com/jesusredondo/ckanext-federgob), designed to enable data federation for those CKAN instances that, at the same time, make use of the [ckanext-dcat](https://github.com/ckan/ckanext-dcat) plugin (original FederGob plugin is incompatible with ckanext-dcat one).
+It is an extension for CKAN that eases the federation process of CKAN catalogs with the global catalog of Spain, [Datos.gob](http://www.datos.gob.es/). Specifically, the plugin presented on this page is a modified version of the original [FederGob plugin](https://github.com/jesusredondo/ckanext-federgob), designed to enable data federation for those CKAN instances that, at the same time, make use of the [ckanext-dcat](https://github.com/ckan/ckanext-dcat) plugin (original FederGob plugin is incompatible with ckanext-dcat one). This documentation is based on the original documentation of FederGob plugin.
 
 The official documentation to federate portals against [Datos.gob](http://www.datos.gob.es/) can be found here: [Federator manual](http://www.datos.gob.es/content/manual-de-uso-de-herramienta-federador). It’s recommendable to read the official document about how metadata should structure: [Norma Técnica de Interoperabilidad de Reutilización de Recursos de Información](https://www.boe.es/buscar/doc.php?id=BOE-A-2013-2380).
 
@@ -19,9 +19,9 @@ It is desirable to check [this presentation about Federator](http://www.w3.org/2
 
 By default CKAN generates rdf/xml metadata about every single dataset using DCAT vocabulary. 
 
-Federatedatosgob adequates this metadata to the Federator template (see annex I in the [Federator user manual]([http://datos.gob.es/sites/default/files/federador_-_manual_de_usuario_2.docx])). Additionally, metadata about the catalog and the portal is created, completing the metadata needed for the federation. 
+FederGob adequates this metadata to the Federator template (see annex I in the [Federator user manual]([http://datos.gob.es/sites/default/files/federador_-_manual_de_usuario_2.docx])). Additionally, metadata about the catalog and the portal is created, completing the metadata needed for the federation. 
 
-Federatedatosgob provides scripts to update the metadata periodically.
+FederGob provides scripts to update the metadata periodically.
 
 
 ## Prerequisites
@@ -41,28 +41,28 @@ All the datasets in the CKAN catalog should have filled the tag field (etiqueta)
 2. This plugin only works when used together with [ckanext-dcat](https://github.com/ckan/ckanext-dcat). If your CKAN instance does not use [ckanext-dcat](https://github.com/ckan/ckanext-dcat), you can use the [original FederGob](https://github.com/jesusredondo/ckanext-federgob) plugin. Both plugins should be instaled and configured separately.
  
 
-## How to install federatedatosgob?
+## How to install FederGob?
 
 There are two different ways to install the plugin. If installing it in one way does not work, the other way can be tried.
 
-1. Copy the [plugin](https://github.com/jesusredondo/ckanext-federatedatosgob) to your ckan `src` folder (normally /usr/lib/ckan/default/src/).
+1. Copy the [plugin](https://github.com/oeg-upm/ckanext-federgob) to your ckan `src` folder (normally /usr/lib/ckan/default/src/).
 
 Install the plugin:
 
-    cd ckanext-federatedatosgob
+    cd ckanext-federgob
     sudo python setup.py develop
 
-Restart Apache and make sure to add federatedatosgob to ckan.plugins in your config file.
+Restart Apache and make sure to add FederGob (`federgob`) to ckan.plugins in your config file.
 
 2. Enter the CKAN `src` folder (normally /usr/lib/ckan/default/src/)
 
 Execute
 
-	pip install -e "git+https://github.com/jesusredondo/ckanext-federgob.git#egg=ckanext-federgob"
+	pip install -e "git+https://github.com/oeg-upm/ckanext-federgob.git#egg=ckanext-federgob"
 
-## How to configure federatedatosgob with the Federator?
+## How to configure FederGob with the Federator?
 
-Federatedatosgob must to be configured locally to create the metadata. Later, the Federator will read the metadata generated. 
+FederGob must to be configured locally to create the metadata. Later, the Federator will read the metadata generated. 
 
 If you have problems with the installation, please create a new issue.
 
@@ -70,7 +70,7 @@ If you have problems with the installation, please create a new issue.
 ### Local configuration
 
 These steps have to be completed to configure the creation of the metadata periodically.
-All commands must be run in the `.../ckanext-federatedatosgob/ckanext/federatedatosgob/FDG/` path.
+All commands must be run in the `.../ckanext-federgob/ckanext/federgob/FDG/` path.
 
 
 #### Configure portal metadata
@@ -103,7 +103,7 @@ Finally, since the RDF file containing the metadata will be used by the federato
 
 As we have seen before, the metadata is generated each time `federatedatosgob.py` is run. To automate the update, `federatedatosgob.py` must be run periodically. [Cron](http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5) can be used to run tasks in given intervals or at a given time, you should configure it to your updating preferences.
 
-Additionally, federatedatosgob includes a default method to configure [Cron](http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5) each day at 00.00 a.m. To do so, simply run the script `auto_crontab.py` as root → `sudo python auto_crontab.py`.
+Additionally, FederGob includes a default method to configure [Cron](http://unixhelp.ed.ac.uk/CGI/man-cgi?crontab+5) each day at 00.00 a.m. To do so, simply run the script `auto_crontab.py` as root → `sudo python auto_crontab.py`.
 
 ### External configuration: Configure Federator from Datos.gob
 

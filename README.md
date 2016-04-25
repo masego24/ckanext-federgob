@@ -4,7 +4,7 @@ ckanext-federgob
 
 ## ¿Qué es FederGob?
 
-FederGob es una extensión para CKAN que facilita el proceso de federación con [Datos.gob.es](http://www.datos.gob.es/), el catálogo de datos oficial de España. En concreto, el plugin presentado en esta pagina es una version modificada del plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob), que esta especialmente modificado para permitir federación desde aquellas instancias del CKAN que utilicen el plugin [ckanext-dcat](https://github.com/ckan/ckanext-dcat) (el plugin ckanext-dcat causa problemas si estuviera funcionando al unísono con el plugin original de FederGob).
+FederGob es una extensión para CKAN que facilita el proceso de federación con [Datos.gob.es](http://www.datos.gob.es/), el catálogo de datos oficial de España. En concreto, el plugin presentado en esta pagina es una version modificada del plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob), que esta especialmente modificado para permitir federación desde aquellas instancias del CKAN que utilicen el plugin [ckanext-dcat](https://github.com/ckan/ckanext-dcat) (el plugin ckanext-dcat causa problemas si estuviera funcionando al unísono con el plugin original de FederGob). Esta documentación esta basada en la documentación del plugin original.
 
 La documentación oficial para federar portales contra [Datos.gob.es](http://www.datos.gob.es/) es la siguiente: [manual del Federador](http://www.datos.gob.es/content/manual-de-uso-de-herramienta-federador). Es recomendable leer la documentación oficial sobre cómo se deben estructurar los metadatos: [Norma Técnica de Interoperabilidad de Reutilización de Recursos de Información](https://www.boe.es/buscar/doc.php?id=BOE-A-2013-2380).
 
@@ -46,7 +46,7 @@ FederGob incluye scripts para automatizar la generación de los metadatos perió
 
 Existen dos maneras diferentes de instalación del plugin. Si instalandolo de una manera no funciona, se puede hacer utilizando otra manera de instalación. 
 
-1. Copia el [plugin](https://github.com/jesusredondo/ckanext-federgob) a tu carpeta `src` (normalmente es: /usr/lib/ckan/default/src/).
+1. Copia el [plugin](https://github.com/oeg-upm/ckanext-federgob) a tu carpeta `src` (normalmente es: /usr/lib/ckan/default/src/).
 
 Instalar el plugin:
 
@@ -59,7 +59,7 @@ Asegurarse que `federgob está en la lista de plugins activos del fichero de con
 
 Ejecutar:
 
-	pip install -e "git+https://github.com/jesusredondo/ckanext-federgob.git#egg=ckanext-federgob"
+	pip install -e "git+https://github.com/oeg-upm/ckanext-federgob.git#egg=ckanext-federgob"
 
 
 ## ¿Cómo configurar FederGob?

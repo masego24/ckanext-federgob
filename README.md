@@ -112,7 +112,7 @@ El federador debe leer los metadatos generados en el fichero RDF de metadatos ut
 
 
 ## Reconocimientos
-Este plugin ha sido desarrollado por el [Ontology Engineering Group](http://www.oeg-upm.net/), y esta basado en el plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob) desarrollado por el grupo [Quercus SEG](http://www.unex.es/investigacion/grupos/quercus).
+Este plugin ha sido desarrollado por el [Ontology Engineering Group](http://www.oeg-upm.net/), basado en el plugin [original FederGob](https://github.com/jesusredondo/ckanext-federgob), desarrollado por el grupo [Quercus](http://www.unex.es/investigacion/grupos/quercus).
 
 ## Licencia
 Este plugin se publica bajo la licencia [GNU Affero General Public License (AGPL) v3.0](http://www.gnu.org/licenses/agpl-3.0.html)

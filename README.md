@@ -39,7 +39,7 @@ FederGob incluye scripts para automatizar la generación de los metadatos perió
 
 1. No soporta descripciones multi-valuadas. (Por ejemplo, descripciones en varios idiomas).
 
-2. Este plugin no se ha testeado en conjunto con [ckanext-dcat](https://github.com/ckan/ckanext-dcat), podría haber problemas si ambos estuvieran funcionando al unísono.
+2. Este plugin no funciona en conjunto con [ckanext-dcat](https://github.com/ckan/ckanext-dcat). Si su instancia del CKAN utiliza [ckanext-dcat](https://github.com/ckan/ckanext-dcat) y tambien quiere utilizar FederGob, puede utilizar la version de [FederGob modificada](https://github.com/oeg-upm/ckanext-federgob) para función en conjunto con ckanext-dcat.
  
 
 ## ¿Cómo instalar el FederGob?

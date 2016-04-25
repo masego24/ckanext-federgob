@@ -38,7 +38,7 @@ All the datasets in the CKAN catalog should have filled the tag field (etiqueta)
 
 1. It doesn’t support multi-valued fields for descriptions.
 
-2. This plugin has not been tested while using [ckanext-dcat](https://github.com/ckan/ckanext-dcat). Malfunctions could arise when both working.
+2. This plugin does not work jointly with [ckanext-dcat](https://github.com/ckan/ckanext-dcat). If your CKAN instance is using [ckanext-dcat](https://github.com/ckan/ckanext-dcat) and you would like to use FederGob, you can use the [modified version of FederGob](https://github.com/oeg-upm/ckanext-federgob) adapted to work with ckanext-dcat.
  
 
 ## How to install federatedatosgob?

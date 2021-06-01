@@ -101,18 +101,24 @@ for name in result:
 	print >>final_file,"<dcat:dataset>"
 
 	#Remove header, everything that is before <!--dataset_metadata-->"
-	
 	strings_page_RDF = pageRDF.readlines()
+
 	pca_old = "<rdf:value>pc-axis</rdf:value>"
 	pca_new = "<rdf:value>text/pc-axis</rdf:value>"
 	pcam_old = "<rdfs:label>pc-axis</rdfs:label>"
 	pcam_new = "<rdfs:label>PC-Axis</rdfs:label>"
 	rdf_old = "<rdf:value>RDF</rdf:value>"
-	rdf_new = "<rdf:value>text/RDF</rdf:value>"
+	rdf_new = "<rdf:value>application/rdf+xml</rdf:value>"
 	sdmx_old = "<rdf:value>sdmx</rdf:value>"
-	sdmx_new = "<rdf:value>text/sdmx</rdf:value>"
+	sdmx_new = "<rdf:value>application/zip</rdf:value>"
 	html_old = "<rdf:value>HTML</rdf:value>"
 	html_new = "<rdf:value>text/HTML</rdf:value>"
+	xls_old = "<rdf:value>XLS</rdf:value>"
+	xls_new = "<rdf:value>application/vnd.ms-excel</rdf:value>"
+	json_old = "<rdf:value>JSON</rdf:value>"
+	json_new = "<rdf:value>application/json</rdf:value>"
+	# dct = "dct:mediaType"
+	# dcat = "dcat:mediaType"
 	uri = "<dct:identifier>https://www.icane.es/data/"
 	strings_page_RDF = [line.replace(pca_old, pca_new) for line in strings_page_RDF]
 	strings_page_RDF = [line.replace(pcam_old, pcam_new) for line in strings_page_RDF]
@@ -120,6 +126,17 @@ for name in result:
 	strings_page_RDF = [line.replace(rdf_old, rdf_new) for line in strings_page_RDF]
 	strings_page_RDF = [line.replace(sdmx_old, sdmx_new) for line in strings_page_RDF]
 	strings_page_RDF = [line.replace(html_old, html_new) for line in strings_page_RDF]
+	strings_page_RDF = [line.replace(json_old, json_new) for line in strings_page_RDF]
+	strings_page_RDF = [line.replace(xls_old, xls_new) for line in strings_page_RDF]
+	lista = []
+	for line in strings_page_RDF:
+		
+		if "dct:mediaType" in line:
+			lista.append(line.replace(line, ""))
+		else:
+			lista.append(line)
+
+	strings_page_RDF = lista
 	strings_page_RDF = [re.sub("<dct:identifier>", uri, line)for line in strings_page_RDF]
 	strings_page_RDF = [re.sub("http:", "https:", line)for line in strings_page_RDF]
 	

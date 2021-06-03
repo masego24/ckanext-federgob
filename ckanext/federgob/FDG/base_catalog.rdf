@@ -12,14 +12,14 @@
   xmlns:owl="http://www.w3.org/2002/07/owl#"
   xmlns:locn="http://www.w3.org/ns/locn#">
 
-  <dcat:Catalog rdf:about="{-URL-CATALOG-}"> 
-	<dct:identifier>{-URL-CATALOG-}/federator.rdf</dct:identifier>
-	<dct:title xml:lang="{-LANGUAGE-}">{-TITLE-}</dct:title>
-	<dct:description xml:lang="{-LANGUAGE-}">{-DESCRIPTION-}</dct:description>
-	<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">{-ISSUED-}</dct:issued> 
-	<dct:publisher rdf:resource="{-URL-PUBLISHER-}" />
+  <dcat:Catalog rdf:about="https://datos.icane.es"> 
+	<dct:identifier>https://datos.icane.es/federator.rdf</dct:identifier>
+	<dct:title xml:lang="es">Portal Open Data del ICANE</dct:title>
+	<dct:description xml:lang="es">datos.icane.es es el portal de carácter regional que organiza el Catálogo de Información Estadística Pública de la Comunidad Autónoma de Cantabria</dct:description>
+	<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-06-01T00:00:00</dct:issued> 
+	<dct:publisher rdf:resource="http://datos.gob.es/recurso/sector-publico/org/Organismo/A06004074" />
 	<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">@@SCRIPT-Date-update@@</dct:modified>
-	<dc:language>{-LANGUAGE-}</dc:language>
+	<dc:language>es</dc:language>
 	<dcat:themeTaxonomy rdf:resource="http://datos.gob.es/kos/sector-publico/sector/" />
-	<foaf:homepage rdf:resource="{-URL-CATALOG-}" />
-	<dct:license rdf:resource="{-URL-LICENSE-}" />
+	<foaf:homepage rdf:resource="https://datos.icane.es" />
+	<dct:license rdf:resource="https://www.icane.es/footer/legal-advisory" />

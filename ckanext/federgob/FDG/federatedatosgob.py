@@ -17,6 +17,7 @@ from datetime import date, datetime
 import re
 import sys
 import os
+import ssl
 
 
 base_path = os.path.dirname( os.path.realpath( __file__ ) )
@@ -27,6 +28,13 @@ base_filename = os.path.join(base_path,'base_catalog.rdf')
 output_filename = os.path.join(base_path,'../public/federator.rdf')
 logfile = os.path.join(base_path,'Logs/log_federator')
 fields_conf = os.path.join(base_path,'fields.conf')
+
+
+# Deactivate SSL certificate verification
+if (not os.environ.get('PYTHONHTTPSVERIFY', '') and
+    getattr(ssl, '_create_unverified_context', None)):
+    ssl._create_default_https_context = ssl._create_unverified_context
+
 
 def fixTags(line,stream) :
 	print >>stream, line.replace('<dct:title>','<dct:title xml:lang="es">').replace('<dct:description>','<dct:description xml:lang="es">'),

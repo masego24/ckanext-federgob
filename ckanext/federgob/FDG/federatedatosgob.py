@@ -10,10 +10,8 @@
 #Script to generate the whole metadata of the Catalog.
 
 import urllib2
-import urllib
 import json
-import time
-from datetime import date, datetime
+from datetime import datetime
 import re
 import sys
 import os
@@ -106,9 +104,9 @@ for name in result:
         1.- replace values:
             *_old and *_new and others varibles are used to replace values
 
-        2.- items is used to make tranformations in a temporary list
+        2.- excluded is used to don't include datasets which doesn't have distribution tag 
             publisher_base_config is used to replace the old publisher tag as base_catalog publisher tag
-            excluded is used to don't include datasets which doesn't have distribution tag
+            
     """
     pca_old = "<rdf:value>pc-axis</rdf:value>"
     pca_new = "<rdf:value>text/pc-axis</rdf:value>"
@@ -124,6 +122,8 @@ for name in result:
     xls_new = "<rdf:value>application/vnd.ms-excel</rdf:value>"
     json_old = "<rdf:value>JSON</rdf:value>"
     json_new = "<rdf:value>application/json</rdf:value>"
+    media_type_pca_old = "<dcat:mediaType>application/vnd.pc-axis</dcat:mediaType>"
+    media_type_pca_new = "<dcat:mediaType>text/pc-axis</dcat:mediaType>"
     dct = "dct:mediaType"
     dcat = "dcat:mediaType"
     uri = "<dct:identifier>https://www.icane.es/data/"
@@ -139,30 +139,25 @@ for name in result:
     strings_page_RDF = [line.replace(json_old, json_new) for line in strings_page_RDF]
     strings_page_RDF = [line.replace(xls_old, xls_new) for line in strings_page_RDF]
     strings_page_RDF = [line.replace(dct, dcat) for line in strings_page_RDF]
+    strings_page_RDF = [line.replace(media_type_pca_old, media_type_pca_new) for line in strings_page_RDF]
     strings_page_RDF = [re.sub("<dct:identifier>", uri, line)for line in strings_page_RDF]
     strings_page_RDF = [re.sub("http:", "https:", line)for line in strings_page_RDF]
     strings_page_RDF = [re.sub(freq_wrong, freq_right, line)for line in strings_page_RDF]
     
-    items = []
     excluded = False
 
-    for index, line in enumerate(strings_page_RDF):
-        if "application/vnd.pc-axis" in line:
-                items.append(line.replace("application/vnd.pc-axis", "text/pc-axis"))
-        else:
-            items.append(line)
-            
-            # if after language tag don't exists a distribution tag, we exclude it
-            if "dct:language" in line:
-                if "dcat:distribution" in strings_page_RDF[index+1]:
-                    pass
-                else:
-                    excluded = True
+    # if after language tag don't exists a distribution tag, we exclude it
+    for index, line in enumerate(strings_page_RDF):           
+        if "dct:language" in line:
+            if "dcat:distribution" in strings_page_RDF[index+1]:
+                pass
+            else:
+                excluded = True
 
     if excluded == False:
         counter_line = 0
         while not strings_page_RDF[counter_line].strip().startswith("<dcat:Dataset"):
-            counter_line+=1
+            counter_line += 1
 
         while not strings_page_RDF[counter_line].strip().startswith("</rdf:RDF>"):
             # change <dct:publisher for publisher_base_config
@@ -176,7 +171,7 @@ for name in result:
                 strings_page_RDF[counter_line] = publisher_base_config
             
             fixTags(strings_page_RDF[counter_line],final_file)
-            counter_line+=1
+            counter_line += 1
     else:
         # save reference in excluded file log
         references = [s for s in strings_page_RDF if "<dct:references" in s]

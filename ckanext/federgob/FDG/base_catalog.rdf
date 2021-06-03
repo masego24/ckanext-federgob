@@ -13,11 +13,11 @@
   xmlns:locn="http://www.w3.org/ns/locn#">
 
   <dcat:Catalog rdf:about="https://datos.icane.es"> 
-	<dct:identifier>https://datos.icane.esfederator.rdf</dct:identifier>
+	<dct:identifier>https://datos.icane.es/federator.rdf</dct:identifier>
 	<dct:title xml:lang="es">Portal Open Data del ICANE</dct:title>
 	<dct:description xml:lang="es">datos.icane.es es el portal de carácter regional que organiza el Catálogo de Información Estadística Pública de la Comunidad Autónoma de Cantabria</dct:description>
 	<dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2014-06-01T00:00:00</dct:issued> 
-	<dct:publisher rdf:resource="https://datos.gob.es/recurso/sector-publico/org/Organismo/A06004074" />
+	<dct:publisher rdf:resource="http://datos.gob.es/recurso/sector-publico/org/Organismo/A06004074" />
 	<dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">@@SCRIPT-Date-update@@</dct:modified>
 	<dc:language>es</dc:language>
 	<dcat:themeTaxonomy rdf:resource="http://datos.gob.es/kos/sector-publico/sector/" />

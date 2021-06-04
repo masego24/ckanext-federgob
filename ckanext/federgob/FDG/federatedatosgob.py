@@ -151,6 +151,17 @@ for name in result:
     strings_page_RDF = [re.sub("http:", "https:", line)for line in strings_page_RDF]
     strings_page_RDF = [re.sub(freq_wrong, freq_right, line)for line in strings_page_RDF]
     
+    lista = []
+	
+    # Elimina la etiqueta dct:accrualPeriodicity #
+    for line in strings_page_RDF:
+        if "dct:accrualPeriodicity" in line:
+            lista.append(line.replace(line, ""))
+        else:
+            lista.append(line)
+    
+	strings_page_RDF = lista
+    
     excluded = False
 
     print >>final_file,"<dcat:dataset>"

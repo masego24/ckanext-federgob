@@ -93,9 +93,6 @@ for name in result:
         print 'Can not download rdf file:', url_dataset_path+"/"+name+".rdf"
         sys.exit(0)
 
-    print >>final_file,"<dcat:dataset>"
-
-    #Remove header, everything that is before <!--dataset_metadata-->"
     strings_page_RDF = pageRDF.readlines()
 
     """
@@ -110,23 +107,33 @@ for name in result:
     """
     pca_old = "<rdf:value>pc-axis</rdf:value>"
     pca_new = "<rdf:value>text/pc-axis</rdf:value>"
+
     pcam_old = "<rdfs:label>pc-axis</rdfs:label>"
     pcam_new = "<rdfs:label>PC-Axis</rdfs:label>"
+    
     rdf_old = "<rdf:value>RDF</rdf:value>"
     rdf_new = "<rdf:value>application/rdf+xml</rdf:value>"
+    
     sdmx_old = "<rdf:value>sdmx</rdf:value>"
     sdmx_new = "<rdf:value>application/zip</rdf:value>"
+    
     html_old = "<rdf:value>HTML</rdf:value>"
     html_new = "<rdf:value>text/HTML</rdf:value>"
+    
     xls_old = "<rdf:value>XLS</rdf:value>"
     xls_new = "<rdf:value>application/vnd.ms-excel</rdf:value>"
+    
     json_old = "<rdf:value>JSON</rdf:value>"
     json_new = "<rdf:value>application/json</rdf:value>"
+    
     media_type_pca_old = "<dcat:mediaType>application/vnd.pc-axis</dcat:mediaType>"
     media_type_pca_new = "<dcat:mediaType>text/pc-axis</dcat:mediaType>"
+    
     dct = "dct:mediaType"
     dcat = "dcat:mediaType"
+    
     uri = "<dct:identifier>https://www.icane.es/data/"
+    
     freq_wrong = "https://purl.org/cld/freq/https://purl.org/cld/freq/"
     freq_right = "https://purl.org/cld/freq/"
 
@@ -145,6 +152,8 @@ for name in result:
     strings_page_RDF = [re.sub(freq_wrong, freq_right, line)for line in strings_page_RDF]
     
     excluded = False
+
+    print >>final_file,"<dcat:dataset>"
 
     # if after language tag don't exists a distribution tag, we exclude it
     for index, line in enumerate(strings_page_RDF):           
@@ -172,15 +181,16 @@ for name in result:
             
             fixTags(strings_page_RDF[counter_line],final_file)
             counter_line += 1
+        
+        print >>final_file,"</dcat:dataset>\n"
+
     else:
         # save reference in excluded file log
         references = [s for s in strings_page_RDF if "<dct:references" in s]
         print >>excluded_file, references
             
-        # delete initial dcat:dataset unused
+        # delete initial <dcat:dataset> unused
         final_file.seek(-15, 1)
-
-    print >>final_file,"</dcat:dataset>\n"
 
 
 #################################################################
